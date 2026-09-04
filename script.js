@@ -447,6 +447,17 @@ function setText(id, value) {
         element.textContent =
             value;
 
+        /* Hide loading state if it exists */
+        const loadingElement =
+            $(`${id}-loading`);
+
+        if (loadingElement) {
+            loadingElement.style.display = 'none';
+        }
+
+        /* Show the actual content */
+        element.style.display = 'block';
+
     }
 
 }
