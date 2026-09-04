@@ -1469,6 +1469,84 @@ function setupNavbar() {
 
 
 /* =====================================================
+   SMOOTH ANCHORS
+===================================================== */
+
+function setupSmoothAnchors() {
+
+    document
+        .querySelectorAll('a[href^="#"]')
+        .forEach(link => {
+
+            link.addEventListener(
+                "click",
+                event => {
+
+                    const targetId =
+                        link.getAttribute("href");
+
+
+                    if (
+                        !targetId ||
+                        targetId === "#"
+                    ) {
+                        return;
+                    }
+
+
+                    const target =
+                        document.querySelector(
+                            targetId
+                        );
+
+
+                    if (!target) {
+                        return;
+                    }
+
+
+                    event.preventDefault();
+
+
+                    const navbar =
+                        $("navbar");
+
+
+                    const offset =
+                        navbar
+                            ? navbar.offsetHeight + 16
+                            : 16;
+
+
+                    const targetPosition =
+                        target.getBoundingClientRect().top +
+                        window.scrollY -
+                        offset;
+
+
+                    window.scrollTo({
+                        top: Math.max(
+                            0,
+                            targetPosition
+                        ),
+                        behavior: "smooth"
+                    });
+
+
+                    history.replaceState(
+                        null,
+                        "",
+                        targetId
+                    );
+
+                }
+            );
+
+        });
+}
+
+
+/* =====================================================
    REVEAL ANIMATION
 ===================================================== */
 
@@ -1607,6 +1685,8 @@ document.addEventListener(
     function () {
 
         setupNavbar();
+
+        setupSmoothAnchors();
 
         setupContactForm();
 
