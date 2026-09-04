@@ -125,7 +125,7 @@ img {
 
 .logo {
     font-family: var(--display-font);
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 400;
     letter-spacing: 0;
 }
@@ -144,7 +144,7 @@ img {
 .nav-links a {
     position: relative;
 
-    font-size: 14px;
+    font-size: 16px;
     color: #333333;
 
     transition: color 0.25s var(--ease-smooth);
@@ -207,7 +207,7 @@ img {
 
     color: #777777;
 
-    font-size: 13px;
+    font-size: 15px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
 }
@@ -264,7 +264,7 @@ img {
 .hero-description {
     max-width: 650px;
 
-    font-size: 19px;
+    font-size: 22px;
 
     line-height: 1.45;
 
@@ -291,7 +291,7 @@ img {
 
     border-radius: 8px;
 
-    font-size: 13px;
+    font-size: 15px;
 
     transition:
         background 0.3s var(--ease-smooth),
@@ -338,7 +338,7 @@ img {
 .section-number {
     color: #aaaaaa;
 
-    font-size: 12px;
+    font-size: 14px;
 
     min-width: 20px;
 }
@@ -348,7 +348,7 @@ img {
     font-family: var(--display-font);
     color: #777777;
 
-    font-size: 13px;
+    font-size: 15px;
 
     letter-spacing: 0.08em;
 
@@ -411,7 +411,7 @@ img {
 .skill-number {
     color: #aaaaaa;
 
-    font-size: 12px;
+    font-size: 14px;
 }
 
 
@@ -431,7 +431,7 @@ img {
 
     background: #fafafa;
 
-    font-size: 13px;
+    font-size: 15px;
 
     color: #444444;
 }
@@ -448,7 +448,7 @@ img {
 
 
 .skill-card h3 {
-    font-size: 20px;
+    font-size: 24px;
 
     letter-spacing: 0;
 
@@ -461,7 +461,7 @@ img {
 .skill-card p {
     color: #777777;
 
-    font-size: 14px;
+    font-size: 16px;
 
     line-height: 2;
 }
@@ -486,7 +486,7 @@ img {
 
     color: #777777;
 
-    font-size: 12px;
+    font-size: 14px;
 }
 
 
@@ -543,7 +543,7 @@ img {
 
     color: #999999;
 
-    font-size: 12px;
+    font-size: 14px;
 }
 
 
@@ -598,7 +598,7 @@ img {
 
 .project-content h3 {
     font-family: var(--display-font);
-    font-size: 22px;
+    font-size: 26px;
 
     line-height: 1.2;
 
@@ -611,7 +611,7 @@ img {
 .project-description {
     color: #777777;
 
-    font-size: 14px;
+    font-size: 16px;
 
     line-height: 1.9;
 
@@ -626,7 +626,7 @@ img {
 
     letter-spacing: 0.04em;
 
-    font-size: 12px;
+    font-size: 14px;
 }
 
 
@@ -647,7 +647,7 @@ img {
 
     border-radius: 8px;
 
-    font-size: 12px;
+    font-size: 14px;
 
     transition:
         background 0.3s var(--ease-smooth),
@@ -695,7 +695,7 @@ img {
     background: #111111;
     color: #ffffff;
 
-    font-size: 22px;
+    font-size: 26px;
 
     line-height: 2.1;
 
@@ -724,7 +724,7 @@ img {
 
     border-bottom: 1px solid #eeeeee;
 
-    font-size: 13px;
+    font-size: 15px;
 }
 
 
@@ -763,7 +763,7 @@ img {
     font-family: var(--display-font);
     max-width: 500px;
 
-    font-size: 34px;
+    font-size: 40px;
 
     line-height: 1.05;
 
@@ -776,7 +776,7 @@ img {
 .contact-copy p {
     color: #777777;
 
-    font-size: 13px;
+    font-size: 15px;
 }
 
 
@@ -797,7 +797,7 @@ img {
 
     color: #555555;
 
-    font-size: 12px;
+    font-size: 14px;
 }
 
 
@@ -864,7 +864,7 @@ img {
 
     cursor: pointer;
 
-    font-size: 13px;
+    font-size: 15px;
 
     transition:
         opacity 0.3s var(--ease-smooth),
@@ -894,7 +894,7 @@ img {
 
     margin-top: 14px;
 
-    font-size: 13px;
+    font-size: 15px;
 }
 
 
@@ -917,7 +917,7 @@ img {
 
     color: #999999;
 
-    font-size: 13px;
+    font-size: 15px;
 }
 
 
@@ -926,7 +926,7 @@ img {
 
     color: #777777;
 
-    font-size: 13px;
+    font-size: 15px;
 
     line-height: 1.6;
 }
@@ -943,7 +943,7 @@ footer {
 
     color: #888888;
 
-    font-size: 12px;
+    font-size: 14px;
 }
 
 
@@ -1028,7 +1028,7 @@ footer {
 
 
     .hero-description {
-        font-size: 18px;
+        font-size: 20px;
     }
 
 
@@ -1075,12 +1075,12 @@ footer {
 
 
     .nav-links a {
-        font-size: 12px;
+        font-size: 13px;
     }
 
 
     .logo {
-        font-size: 15px;
+        font-size: 17px;
     }
 
 
@@ -1096,7 +1096,7 @@ footer {
 
         gap: 12px;
 
-        font-size: 11px;
+        font-size: 12px;
     }
 
 
@@ -1108,7 +1108,7 @@ footer {
 
 
     .hero-description {
-        font-size: 18px;
+        font-size: 20px;
     }
 
 
@@ -1164,7 +1164,7 @@ footer {
 
 
     .project-content h3 {
-        font-size: 20px;
+        font-size: 23px;
     }
 
 
@@ -1177,12 +1177,12 @@ footer {
 
 
     .profile-description {
-        font-size: 20px;
+        font-size: 23px;
     }
 
 
     .contact-copy h2 {
-        font-size: 30px;
+        font-size: 34px;
     }
 
 
