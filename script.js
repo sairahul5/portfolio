@@ -14,6 +14,10 @@ const $ = (id) =>
     document.getElementById(id);
 
 
+const PROFILE_REFRESH_INTERVAL =
+    30000;
+
+
 /* =====================================================
    CLEAN VALUE
 ===================================================== */
@@ -298,6 +302,129 @@ function escapeAttribute(value) {
 
 
 /* =====================================================
+   SKILL ICONS
+===================================================== */
+
+const skillIconSlugs = {
+    git: "git/git-original",
+    github: "github/github-original",
+    java: "java/java-original",
+    python: "python/python-original",
+    javascript: "javascript/javascript-original",
+    js: "javascript/javascript-original",
+    react: "react/react-original",
+    html: "html5/html5-original",
+    html5: "html5/html5-original",
+    css: "css3/css3-original",
+    css3: "css3/css3-original",
+    "node.js": "nodejs/nodejs-original",
+    node: "nodejs/nodejs-original",
+    nodejs: "nodejs/nodejs-original",
+    typescript: "typescript/typescript-original",
+    ts: "typescript/typescript-original",
+    angular: "angular/angular-original",
+    vue: "vuejs/vuejs-original",
+    mongodb: "mongodb/mongodb-original",
+    mysql: "mysql/mysql-original",
+    postgresql: "postgresql/postgresql-original",
+    docker: "docker/docker-original",
+    figma: "figma/figma-original",
+    linux: "linux/linux-original",
+    npm: "npm/npm-original-wordmark",
+    express: "express/express-original",
+    sass: "sass/sass-original"
+};
+
+
+function getSkillIconUrl(value) {
+
+    const skillName =
+        cleanValue(value)
+            .toLowerCase();
+
+
+    const slug =
+        skillIconSlugs[skillName];
+
+
+    if (!slug) {
+        return "";
+    }
+
+
+    return `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${slug}.svg`;
+}
+
+
+function renderSkillIcon(value, skillName) {
+
+    const iconValue =
+        cleanValue(value) ||
+        cleanValue(skillName)
+            .substring(0, 2)
+            .toUpperCase();
+
+
+    const imageUrl =
+        getImageUrl(iconValue);
+
+
+    const skillIconUrl =
+        getSkillIconUrl(iconValue);
+
+
+    const resolvedUrl =
+        /^https?:\/\//i.test(imageUrl)
+            ? imageUrl
+            : skillIconUrl;
+
+
+    if (!resolvedUrl) {
+        return escapeHTML(iconValue);
+    }
+
+
+    return `
+        <img
+            class="skill-icon-image"
+            src="${escapeAttribute(resolvedUrl)}"
+            alt="${escapeAttribute(skillName || iconValue)}"
+            data-fallback="${escapeAttribute(iconValue)}"
+        />
+    `;
+}
+
+
+function activateSkillIconFallbacks(container) {
+
+    container
+        .querySelectorAll(".skill-icon-image")
+        .forEach(image => {
+
+            image.addEventListener(
+                "error",
+                () => {
+
+                    const fallback =
+                        image.dataset.fallback ||
+                        "";
+
+
+                    image.replaceWith(
+                        document.createTextNode(fallback)
+                    );
+
+                },
+                {
+                    once: true
+                }
+            );
+
+        });
+}
+
+
+/* =====================================================
    SET TEXT
 ===================================================== */
 
@@ -320,6 +447,75 @@ function setText(id, value) {
 /* =====================================================
    LOAD PROFILE
 ===================================================== */
+
+function formatProfileLabel(key) {
+
+    return String(key)
+        .replace(/([a-z])([A-Z])/g, "$1 $2")
+        .replace(/[_-]+/g, " ")
+        .replace(/\s+/g, " ")
+        .trim()
+        .replace(
+            /\b\w/g,
+            character => character.toUpperCase()
+        );
+}
+
+
+function renderProfileInfo(profile) {
+
+    const container =
+        $("profile-info");
+
+
+    if (!container) {
+        return;
+    }
+
+
+    const excludedKeys =
+        new Set([
+            "description",
+            "bio"
+        ]);
+
+
+    const rows =
+        Object.entries(profile)
+            .filter(
+                ([key, value]) =>
+                    !excludedKeys.has(
+                        key.toLowerCase()
+                    ) &&
+                    cleanValue(value) !== ""
+            )
+            .map(
+                ([key, value]) => `
+                    <div class="info-row">
+                        <span class="info-label">
+                            ${escapeHTML(
+                                formatProfileLabel(key)
+                            )}
+                        </span>
+                        <span class="info-value">
+                            ${escapeHTML(
+                                cleanValue(value)
+                            )}
+                        </span>
+                    </div>
+                `
+            )
+            .join("");
+
+
+    container.innerHTML =
+        rows ||
+        `
+            <div class="error-message">
+                No profile details available.
+            </div>
+        `;
+}
 
 async function loadProfile() {
 
@@ -397,26 +593,6 @@ async function loadProfile() {
             );
 
 
-        const location =
-            getField(
-                profile,
-                [
-                    "Location",
-                    "location"
-                ]
-            );
-
-
-        const focus =
-            getField(
-                profile,
-                [
-                    "Focus",
-                    "focus"
-                ]
-            );
-
-
         const status =
             getField(
                 profile,
@@ -441,18 +617,6 @@ async function loadProfile() {
 
         const finalDescription =
             description || "";
-
-
-        const finalLocation =
-            location || "-";
-
-
-        const finalFocus =
-            focus || "-";
-
-
-        const finalStatus =
-            status || "AVAILABLE";
 
 
         /*
@@ -497,13 +661,19 @@ async function loadProfile() {
 
         if (heroStatus) {
 
+            heroStatus.hidden =
+                !status;
+
+
             heroStatus.innerHTML =
-                `
-                <span class="status-dot"></span>
-                ${escapeHTML(
-                    finalStatus.toUpperCase()
-                )}
-                `;
+                status
+                    ? `
+                        <span class="status-dot"></span>
+                        ${escapeHTML(
+                            status.toUpperCase()
+                        )}
+                    `
+                    : "";
 
         }
 
@@ -518,34 +688,7 @@ async function loadProfile() {
         );
 
 
-        setText(
-            "profile-name",
-            finalName
-        );
-
-
-        setText(
-            "profile-role",
-            finalRole
-        );
-
-
-        setText(
-            "profile-location",
-            finalLocation
-        );
-
-
-        setText(
-            "profile-focus",
-            finalFocus
-        );
-
-
-        setText(
-            "profile-status",
-            finalStatus
-        );
+        renderProfileInfo(profile);
 
 
         /*
@@ -592,11 +735,6 @@ async function loadProfile() {
             "LYNEX_"
         );
 
-
-        setText(
-            "profile-name",
-            "-"
-        );
 
     }
 
@@ -739,8 +877,9 @@ async function loadSkills() {
                                 </span>
 
                                 <div class="skill-icon">
-                                    ${escapeHTML(
-                                        icon
+                                    ${renderSkillIcon(
+                                        icon,
+                                        name
                                     )}
                                 </div>
 
@@ -791,6 +930,9 @@ async function loadSkills() {
                     }
                 )
                 .join("");
+
+
+        activateSkillIconFallbacks(container);
 
 
         activateRevealAnimations();
@@ -1424,6 +1566,25 @@ async function loadPortfolio() {
 
 
 /* =====================================================
+   LIVE PROFILE UPDATES
+===================================================== */
+
+function setupLiveProfileUpdates() {
+
+    window.setInterval(
+        () => {
+
+            if (!document.hidden) {
+                loadProfile();
+            }
+
+        },
+        PROFILE_REFRESH_INTERVAL
+    );
+}
+
+
+/* =====================================================
    START
 ===================================================== */
 
@@ -1438,6 +1599,8 @@ document.addEventListener(
         setupFooter();
 
         loadPortfolio();
+
+        setupLiveProfileUpdates();
 
     }
 );
