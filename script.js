@@ -373,6 +373,14 @@ function renderSkillIcon(value, skillName) {
         getSkillIconUrl(iconValue);
 
 
+    const fallbackValue =
+        getSkillIconUrl(skillName)
+            ? cleanValue(skillName)
+            : iconValue.startsWith("http")
+                ? cleanValue(skillName)
+                : iconValue;
+
+
     const resolvedUrl =
         /^https?:\/\//i.test(imageUrl)
             ? imageUrl
@@ -389,7 +397,7 @@ function renderSkillIcon(value, skillName) {
             class="skill-icon-image"
             src="${escapeAttribute(resolvedUrl)}"
             alt="${escapeAttribute(skillName || iconValue)}"
-            data-fallback="${escapeAttribute(iconValue)}"
+            data-fallback="${escapeAttribute(fallbackValue)}"
         />
     `;
 }
