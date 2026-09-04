@@ -18,6 +18,8 @@
 
 html {
     scroll-behavior: smooth;
+
+    scroll-padding-top: 96px;
 }
 
 
@@ -50,6 +52,15 @@ a {
     transition:
         color 0.25s var(--ease-smooth),
         opacity 0.25s var(--ease-smooth);
+}
+
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid #111111;
+    outline-offset: 4px;
 }
 
 
@@ -640,6 +651,13 @@ img {
 }
 
 
+.project-link,
+.hero-button,
+.submit-button {
+    will-change: transform;
+}
+
+
 .project-number {
     align-self: start;
 
@@ -1110,6 +1128,8 @@ footer {
     transition:
         opacity 0.7s var(--ease-smooth),
         transform 0.7s var(--ease-smooth);
+
+    will-change: opacity, transform;
 }
 
 
@@ -1134,6 +1154,12 @@ footer {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
+    }
+
+
+    .reveal {
+        opacity: 1;
+        transform: none;
     }
 
 }

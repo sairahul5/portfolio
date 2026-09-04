@@ -1528,10 +1528,16 @@ function activateRevealAnimations() {
 
 
     elements.forEach(
-        element =>
+        (element, index) => {
+
+            element.style.transitionDelay =
+                `${Math.min(index * 60, 360)}ms`;
+
             observer.observe(
                 element
-            )
+            );
+
+        }
     );
 
 }
