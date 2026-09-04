@@ -10,7 +10,7 @@
 
 
 :root {
-    --display-font: "Press Start 2P", monospace;
+    --display-font: "Montserrat", sans-serif;
     --ink: #111111;
     --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
 }
