@@ -1480,6 +1480,77 @@ function setupNavbar() {
 
 
 /* =====================================================
+   THEME
+===================================================== */
+
+function setupTheme() {
+
+    const toggle =
+        $("theme-toggle");
+
+    if (!toggle) {
+        return;
+    }
+
+    const root =
+        document.documentElement;
+
+    const savedTheme =
+        localStorage.getItem("portfolio-theme");
+
+    const initialTheme =
+        savedTheme ||
+        (window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light");
+
+    function applyTheme(theme) {
+
+        root.dataset.theme =
+            theme;
+
+        const isDark =
+            theme === "dark";
+
+        toggle.setAttribute(
+            "aria-label",
+            isDark ? "Switch to light mode" : "Switch to dark mode"
+        );
+
+        toggle.setAttribute(
+            "title",
+            isDark ? "Switch to light mode" : "Switch to dark mode"
+        );
+
+        toggle.querySelector(".theme-toggle-icon").textContent =
+            isDark ? "☼" : "◐";
+
+        toggle.querySelector(".theme-toggle-label").textContent =
+            isDark ? "Light" : "Dark";
+
+    }
+
+    applyTheme(initialTheme);
+
+    toggle.addEventListener(
+        "click",
+        () => {
+            const nextTheme =
+                root.dataset.theme === "dark" ? "light" : "dark";
+
+            localStorage.setItem(
+                "portfolio-theme",
+                nextTheme
+            );
+
+            applyTheme(nextTheme);
+        }
+    );
+
+}
+
+
+/* =====================================================
    SMOOTH ANCHORS
 ===================================================== */
 
@@ -1696,6 +1767,8 @@ document.addEventListener(
     function () {
 
         setupNavbar();
+
+        setupTheme();
 
         setupSmoothAnchors();
 
