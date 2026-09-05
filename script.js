@@ -1498,6 +1498,9 @@ function setupTheme() {
     const input =
         toggle.querySelector(".input");
 
+    const modeLabel =
+        $("theme-mode");
+
     const savedTheme =
         localStorage.getItem("portfolio-theme");
 
@@ -1530,6 +1533,11 @@ function setupTheme() {
             "aria-label",
             isDark ? "Switch to light mode" : "Switch to dark mode"
         );
+
+        if (modeLabel) {
+            modeLabel.textContent =
+                isDark ? "Dark" : "Light";
+        }
 
     }
 
