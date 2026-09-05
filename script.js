@@ -1495,6 +1495,9 @@ function setupTheme() {
     const root =
         document.documentElement;
 
+    const input =
+        toggle.querySelector(".input");
+
     const savedTheme =
         localStorage.getItem("portfolio-theme");
 
@@ -1512,6 +1515,9 @@ function setupTheme() {
         const isDark =
             theme === "dark";
 
+        input.checked =
+            isDark;
+
         toggle.setAttribute(
             "aria-label",
             isDark ? "Switch to light mode" : "Switch to dark mode"
@@ -1522,21 +1528,20 @@ function setupTheme() {
             isDark ? "Switch to light mode" : "Switch to dark mode"
         );
 
-        toggle.querySelector(".theme-toggle-icon").textContent =
-            isDark ? "☼" : "◐";
-
-        toggle.querySelector(".theme-toggle-label").textContent =
-            isDark ? "Light" : "Dark";
+        input.setAttribute(
+            "aria-label",
+            isDark ? "Switch to light mode" : "Switch to dark mode"
+        );
 
     }
 
     applyTheme(initialTheme);
 
-    toggle.addEventListener(
-        "click",
+    input.addEventListener(
+        "change",
         () => {
             const nextTheme =
-                root.dataset.theme === "dark" ? "light" : "dark";
+                input.checked ? "dark" : "light";
 
             localStorage.setItem(
                 "portfolio-theme",
