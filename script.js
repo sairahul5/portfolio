@@ -1503,9 +1503,7 @@ function setupTheme() {
 
     const initialTheme =
         savedTheme ||
-        (window.matchMedia("(prefers-color-scheme: dark)").matches
-            ? "dark"
-            : "light");
+        "light";
 
     function applyTheme(theme) {
 
