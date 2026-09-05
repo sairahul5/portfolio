@@ -725,7 +725,7 @@ async function loadProfile() {
         */
 
         document.title =
-            `${finalName} | ${finalRole}`;
+            "RAHUL_";
 
 
         console.log(
